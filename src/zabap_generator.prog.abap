@@ -5,7 +5,6 @@
 *&---------------------------------------------------------------------*
 REPORT zabap_generator.
 
-
 PARAMETERS: p_init TYPE abap_bool RADIOBUTTON GROUP mode USER-COMMAND chg_mode DEFAULT 'X',
             p_upd  TYPE abap_bool RADIOBUTTON GROUP mode.
 

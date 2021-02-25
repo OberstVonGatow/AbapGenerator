@@ -27,12 +27,16 @@ CLASS zcl_abap_generator_class DEFINITION
       RETURNING
         VALUE(rv_model_classname) TYPE seoclsname
       RAISING
-        zcx_abap_gen_class_update.
+        zcx_abap_gen_class_update
+        zcx_abap_gen_class_read.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
 
     DATA mo_generator TYPE REF TO zcl_abap_generator.
+    DATA: mt_upd_attributes TYPE seoo_attributes_r,
+          mt_upd_parameters TYPE seos_parameters_r,
+          mt_upd_types      TYPE seoo_types_r.
 
     METHODS read_classes
       IMPORTING
@@ -104,7 +108,24 @@ CLASS zcl_abap_generator_class DEFINITION
       IMPORTING
         iv_class TYPE seoclskey-clsname
       RAISING
-        zcx_abap_gen_class_update .
+        zcx_abap_gen_class_update.
+
+    METHODS read_upd_class
+      IMPORTING
+        iv_classname TYPE seoclsname
+      RAISING
+        zcx_abap_gen_class_read.
+    METHODS delete_attributes
+      IMPORTING
+        is_prefix TYPE zzs_abap_gen_prefix
+      RAISING
+        zcx_abap_gen_class_update.
+    METHODS delete_parameters
+      IMPORTING
+        iv_method TYPE vseomethod-cmpname
+        is_prefix TYPE zzs_abap_gen_prefix
+      RAISING
+        zcx_abap_gen_class_update.
 
 ENDCLASS.
 
@@ -282,62 +303,65 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
       mo_generator->replace_template_table( REF #( intdeferrds ) ).
       mo_generator->replace_template_table( REF #( friendships ) ).
 
+      class-author = sy-uname.
+
+
       CALL FUNCTION 'SEO_CLASS_CREATE_COMPLETE'
         EXPORTING
-*         corrnr                     =
-          devclass                   = iv_package
-          version                    = seoc_version_active
-          genflag                    = seox_true
-          authority_check            = seox_true
-          overwrite                  = seox_true
-          suppress_method_generation = seox_false
+*         corrnr          =
+          devclass        = iv_package
+          version         = seoc_version_active
+*         genflag         =
+          authority_check = seox_true
+          overwrite       = seox_true
+*         suppress_method_generation =
 *         suppress_refactoring_support   =
-          method_sources             = method_sources
-*         locals_def                 =
-*         locals_imp                 =
-*         locals_mac                 =
+          method_sources  = method_sources
+*         locals_def      =
+*         locals_imp      =
+*         locals_mac      =
 *         suppress_index_update      =
-*         typesrc                    =
-*         suppress_corr              =
-*         suppress_dialog            =
+*         typesrc         =
+*         suppress_corr   =
+*         suppress_dialog =
 *         lifecycle_manager          =
-*         locals_au                  =
-*         lock_handle                =
-*         suppress_unlock            =
-*         suppress_commit            =
+*         locals_au       =
+*         lock_handle     =
+*         suppress_unlock =
+*         suppress_commit =
 *         generate_method_impls_wo_frame =
 *      IMPORTING
-*         korrnr                     =
+*         korrnr          =
 *      TABLES
 *         class_descriptions         =
 *         component_descriptions     =
 *         subcomponent_descriptions  =
         CHANGING
-          class                      = class
-          inheritance                = inheritance
-          redefinitions              = redefinitions
-*         implementings              = implementings
-*         impl_details               = impl_details
-          attributes                 = attributes
-          methods                    = methods
-          events                     = events
-          types                      = types
-*         type_source                = type_source
-          parameters                 = parameters
-          exceps                     = exceps
-          aliases                    = aliases
-*         typepusages                = typepusages
-          clsdeferrds                = clsdeferrds
-          intdeferrds                = intdeferrds
-          friendships                = friendships
+          class           = class
+          inheritance     = inheritance
+          redefinitions   = redefinitions
+*         implementings   = implementings
+*         impl_details    = impl_details
+          attributes      = attributes
+          methods         = methods
+          events          = events
+          types           = types
+*         type_source     = type_source
+          parameters      = parameters
+          exceps          = exceps
+          aliases         = aliases
+*         typepusages     = typepusages
+          clsdeferrds     = clsdeferrds
+          intdeferrds     = intdeferrds
+          friendships     = friendships
         EXCEPTIONS
-          existing                   = 1
-          is_interface               = 2
-          db_error                   = 3
-          component_error            = 4
-          no_access                  = 5
-          other                      = 6
-          OTHERS                     = 7.
+          existing        = 1
+          is_interface    = 2
+          db_error        = 3
+          component_error = 4
+          no_access       = 5
+          other           = 6
+          OTHERS          = 7.
       IF sy-subrc = 1.
         CONTINUE.
       ELSEIF sy-subrc <> 0.
@@ -448,6 +472,8 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
         NUMBER zcx_abap_gen_class_update=>msgno.
     ENDIF.
 
+    read_upd_class( rv_model_classname ).
+
     IF iv_dict_rangetab = abap_true.
       create_dict_rangetypes(
         EXPORTING
@@ -477,6 +503,11 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
         is_prefix         = is_prefix
     ).
 
+    delete_attributes(
+      EXPORTING
+        is_prefix         = is_prefix
+    ).
+
 
     generate_class( iv_class = rv_model_classname ).
 
@@ -496,13 +527,25 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
     ls_type-state = 1. "Implemented
     ls_type-typtype = 4. "See code
 
-    LOOP AT it_selection REFERENCE INTO DATA(lr_selection).
+    LOOP AT it_selection REFERENCE INTO DATA(lr_selection)
+    WHERE codetype = mo_generator->c_codetype_selops.
 
       ls_type-cmpname = lr_selection->typename.
       ls_type-typesrc = |{ lr_selection->typename CASE = LOWER } TYPE RANGE OF { lr_selection->dictype CASE = LOWER }|.
+      READ TABLE mt_upd_types REFERENCE INTO DATA(lr_upd_types)
+      WITH KEY clsname = ls_type-clsname
+               cmpname = ls_type-cmpname.
+      IF sy-subrc = 0.
+        DELETE mt_upd_types FROM lr_upd_types->*.
+        CONTINUE.
+      ENDIF.
 
       APPEND ls_type TO lt_types.
     ENDLOOP.
+
+    IF lt_types IS INITIAL.
+      RETURN.
+    ENDIF.
 
     CALL FUNCTION 'SEO_TYPE_CREATE'
       EXPORTING
@@ -627,6 +670,11 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
         is_prefix         = is_prefix
     ).
 
+    delete_parameters(
+       EXPORTING
+        iv_method         = ls_method-cmpname
+        is_prefix         = is_prefix ).
+
 
   ENDMETHOD.
 
@@ -653,21 +701,13 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
 
       ls_attkey-clsname = iv_class.
       ls_attkey-cmpname = lv_sconame.
-      CALL FUNCTION 'SEO_ATTRIBUTE_EXISTENCE_CHECK'
-        EXPORTING
-*         cifkey            = cifkey
-          attkey            = ls_attkey
-        EXCEPTIONS
-          clif_not_existing = 1
-          not_specified     = 2
-          not_existing      = 3
-          is_method         = 4
-          is_event          = 5
-          is_type           = 6
-          no_text           = 7
-          inconsistent      = 8
-          OTHERS            = 9.
-      IF sy-subrc <> 3.
+
+
+      READ TABLE mt_upd_attributes REFERENCE INTO DATA(lr_upd_att)
+      WITH KEY clsname = ls_attkey-clsname
+               cmpname = ls_attkey-cmpname.
+      IF sy-subrc = 0.
+        DELETE mt_upd_attributes FROM lr_upd_att->*.
         CONTINUE.
       ENDIF.
 
@@ -683,6 +723,10 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
        ) ).
 
     ENDLOOP.
+
+    IF lt_attributes IS INITIAL.
+      RETURN.
+    ENDIF.
 
     DATA ls_cifkey TYPE seoclskey.
     ls_cifkey-clsname = iv_class.
@@ -734,19 +778,13 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
       ls_parkey-clsname = iv_class.
       ls_parkey-cmpname = iv_method.
       ls_parkey-sconame = lv_sconame.
-      CALL FUNCTION 'SEO_PARAMETER_EXISTENCE_CHECK'
-        EXPORTING
-*         CMPKEY                 =
-          parkey                 = ls_parkey
-        EXCEPTIONS
-          component_not_existing = 1
-          not_specified          = 2
-          not_existing           = 3
-          is_exception           = 4
-          no_text                = 5
-          inconsistent           = 6
-          OTHERS                 = 7.
-      IF sy-subrc <> 3.
+
+      READ TABLE mt_upd_parameters REFERENCE INTO DATA(lr_upd_para)
+      WITH KEY clsname = ls_parkey-clsname
+               cmpname = ls_parkey-cmpname
+               sconame = ls_parkey-sconame.
+      IF sy-subrc = 0.
+        DELETE mt_upd_parameters FROM lr_upd_para->*.
         CONTINUE.
       ENDIF.
 
@@ -783,7 +821,6 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
 
 
   ENDMETHOD.
-
 
   METHOD generate_class.
 
@@ -1062,5 +1099,134 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
 
   ENDMETHOD.
 
+
+
+  METHOD read_upd_class.
+
+    DATA ls_clskey  TYPE seoclskey.
+    ls_clskey-clsname = iv_classname.
+
+    CALL FUNCTION 'SEO_CLASS_TYPEINFO_GET'
+      EXPORTING
+        clskey            = ls_clskey
+        version           = seoc_version_active
+        state             = '1'
+        with_descriptions = abap_false
+*       resolve_eventhandler_typeinfo =
+*       with_master_language  =
+*       with_enhancements =
+*       read_active_enha  =
+*       enha_action       =
+*       ignore_switches   = 'X'
+      IMPORTING
+*       class             = class
+        attributes        = mt_upd_attributes
+*       methods           = methods
+*       events            = events
+        types             = mt_upd_types
+        parameters        = mt_upd_parameters
+*       exceps            = exceps
+*       implementings     = implementings
+*       inheritance       = inheritance
+*       redefinitions     = redefinitions
+*       impl_details      = impl_details
+*       friendships       = friendships
+*       typepusages       = typepusages
+*       clsdeferrds       = clsdeferrds
+*       intdeferrds       = intdeferrds
+*       explore_inheritance   = explore_inheritance
+*       explore_implementings = explore_implementings
+*       aliases           = aliases
+*       enhancement_methods   = enhancement_methods
+*       enhancement_attributes    = enhancement_attributes
+*       enhancement_events    = enhancement_events
+*       enhancement_implementings = enhancement_implementings
+*       enhancement_types = enhancement_types
+      EXCEPTIONS
+        not_existing      = 1
+        is_interface      = 2
+        model_only        = 3
+        OTHERS            = 4.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_abap_gen_class_read
+        MESSAGE ID zcx_abap_gen_class_read=>msgid
+        NUMBER zcx_abap_gen_class_read=>msgno
+        WITH iv_classname.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD delete_attributes.
+    DATA lt_del_attkeys  TYPE seoo_attribute_keys.
+
+    DATA(lv_prefix_para) = |{ is_prefix-attribute }{ is_prefix-class_parameter }|.
+    DATA(lv_prefix_selopt) = |{ is_prefix-attribute }{ is_prefix-class_selopt }|.
+
+    LOOP AT mt_upd_attributes REFERENCE INTO DATA(lr_attr).
+      IF find( val = lr_attr->cmpname sub = lv_prefix_para case = abap_false ) <> -1
+      OR find( val = lr_attr->cmpname sub = lv_prefix_selopt case = abap_false ) <> -1 .
+        lt_del_attkeys = VALUE #( BASE lt_del_attkeys ( clsname = lr_attr->clsname cmpname = lr_attr->cmpname ) ).
+        DATA(lv_class) = lr_attr->clsname.
+      ENDIF.
+    ENDLOOP.
+
+    IF lt_del_attkeys IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    CALL FUNCTION 'SEO_ATTRIBUTE_DELETE'
+      EXPORTING
+*       cifkey            =
+        attkeys           = lt_del_attkeys
+      EXCEPTIONS
+        clif_not_existing = 1
+        not_specified     = 2
+        not_existing      = 3
+        OTHERS            = 4.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_abap_gen_class_update
+        MESSAGE ID zcx_abap_gen_class_update=>msgid
+        NUMBER zcx_abap_gen_class_update=>msgno
+        WITH lv_class.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD delete_parameters.
+    DATA lt_del_parkeys  TYPE seos_parameter_keys.
+
+    DATA(lv_prefix_para) = |i{ is_prefix-class_parameter }|.
+    DATA(lv_prefix_selopt) = |i{ is_prefix-class_selopt }|.
+
+    LOOP AT mt_upd_parameters REFERENCE INTO DATA(lr_para).
+      IF find( val = lr_para->sconame sub = lv_prefix_para case = abap_false ) <> -1
+      OR find( val = lr_para->sconame sub = lv_prefix_selopt case = abap_false ) <> -1 .
+        lt_del_parkeys = VALUE #( BASE lt_del_parkeys ( clsname = lr_para->clsname cmpname = lr_para->cmpname sconame = lr_para->sconame ) ).
+        DATA(lv_class) = lr_para->clsname.
+      ENDIF.
+    ENDLOOP.
+
+    IF lt_del_parkeys IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    CALL FUNCTION 'SEO_PARAMETER_DELETE'
+      EXPORTING
+*       cmpkey                 =
+        parkeys                = lt_del_parkeys
+      EXCEPTIONS
+        component_not_existing = 1
+        not_specified          = 2
+        not_existing           = 3
+        OTHERS                 = 4.
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_abap_gen_class_update
+        MESSAGE ID zcx_abap_gen_class_update=>msgid
+        NUMBER zcx_abap_gen_class_update=>msgno
+        WITH lv_class.
+    ENDIF.
+
+
+  ENDMETHOD.
 
 ENDCLASS.
