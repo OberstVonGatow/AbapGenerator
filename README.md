@@ -20,3 +20,31 @@ With ABAP Generator:
   - If Dict. Range Tables is checked TableTypes with Rangetables will be created if not already available.
 
 You can change the Default Values in Table ZZT_ABAP_GEN with SM30
+
+Transaction ZABAP_GENERATOR Initialization:
+
+![transaction init](docs/img/transaction_init.png)
+
+Template Package:
+
+![template_package](docs/img/template_package.png)
+
+New Package:
+
+![demo_package](docs/img/demo_package.png)
+
+Update Report as you like:
+
+![edit_report](docs/img/edit_report_selection.png)
+
+Transaction ZABAP_GENERATOR Update:
+
+![transaction upd](docs/img/transaction_upd.png)
+
+Updated Report:
+
+![updated_report](docs/img/updated_report.png)
+
+Updated Model:
+
+![updated_model](docs/img/updated_model.png)
