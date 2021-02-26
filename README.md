@@ -1,5 +1,6 @@
 # AbapGenerator
-Generate ABAP Objects from Templates
+Generate ABAP Objects from Templates.
+ABAP Generator - be smart, stay lazy.
 
 Use-Case:
 If you use a Design Pattern like Model-View-Controller, you always have to create a lot of Object for a new Project.
