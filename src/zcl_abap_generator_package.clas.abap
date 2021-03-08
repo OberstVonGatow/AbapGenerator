@@ -77,7 +77,6 @@ CLASS zcl_abap_generator_package IMPLEMENTATION.
       EXPORTING
         i_reuse_deleted_object       = 'X'
         i_suppress_dialog            = abap_false
-        i_suppress_access_permission = abap_false
       IMPORTING
         e_package                    = lo_package
       CHANGING
