@@ -320,7 +320,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
         ( client = sy-mandt object = 'CLASS_S_PREFIX'       value = 'RT_SEL_' )
         ( client = sy-mandt object = 'CLASS_RT_TYP_PREFIX'  value = 'TYRT_' )
         ( client = sy-mandt object = 'DICT_RT_TYP_PREFIX'   value = 'ZZRT_')
-        ( client = sy-mandt object = 'DEFAULT_DICT_RT_TYP'   value = 'X')
+        ( client = sy-mandt object = 'DEFAULT_DICT_RT_TYP'   value = abap_false )
          ).
 
     INSERT zzt_abap_gen FROM TABLE mt_settings.
