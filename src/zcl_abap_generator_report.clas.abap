@@ -206,10 +206,12 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
+      DATA(lv_typename) = replace( val = lt_codeline[ 2 ] sub = '-' with = '_' ).
+
       rt_range_types = VALUE #( BASE rt_range_types (
                                     varname = lt_codeline[ 1 ]
                                     dictype = |{ lt_codeline[ 2 ] CASE = UPPER }|
-                                    typename = |{ is_prefix-rt_type }{ lt_codeline[ 2 ] CASE = UPPER }|
+                                    typename = |{ is_prefix-rt_type }{ lv_typename CASE = UPPER }|
                                     ) ).
 
     ENDLOOP.

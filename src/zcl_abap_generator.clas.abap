@@ -38,7 +38,8 @@ CLASS zcl_abap_generator DEFINITION
       RAISING
         zcx_abap_gen_report_read
         zcx_abap_gen_class_update
-        zcx_abap_gen_report_update.
+        zcx_abap_gen_report_update
+        zcx_abap_gen_class_read.
 
 
     METHODS replace_template_string
@@ -294,6 +295,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     IF sy-subrc <> 0.
       set_initial_settings( ).
     ENDIF.
+
   ENDMETHOD.
 
   METHOD set_initial_settings.
@@ -320,7 +322,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
         ( client = sy-mandt object = 'CLASS_S_PREFIX'       value = 'RT_SEL_' )
         ( client = sy-mandt object = 'CLASS_RT_TYP_PREFIX'  value = 'TYRT_' )
         ( client = sy-mandt object = 'DICT_RT_TYP_PREFIX'   value = 'ZZRT_')
-        ( client = sy-mandt object = 'DEFAULT_DICT_RT_TYP'   value = abap_false )
+        ( client = sy-mandt object = 'DEFAULT_DICT_RT_TYP'   value = 'X')
          ).
 
     INSERT zzt_abap_gen FROM TABLE mt_settings.

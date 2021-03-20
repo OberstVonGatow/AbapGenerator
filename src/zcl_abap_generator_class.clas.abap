@@ -115,11 +115,13 @@ CLASS zcl_abap_generator_class DEFINITION
         iv_classname TYPE seoclsname
       RAISING
         zcx_abap_gen_class_read.
+
     METHODS delete_attributes
       IMPORTING
         is_prefix TYPE zzs_abap_gen_prefix
       RAISING
         zcx_abap_gen_class_update.
+
     METHODS delete_parameters
       IMPORTING
         iv_method TYPE vseomethod-cmpname
