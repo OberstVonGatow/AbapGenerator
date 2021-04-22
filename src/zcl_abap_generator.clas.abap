@@ -41,7 +41,6 @@ CLASS zcl_abap_generator DEFINITION
         zcx_abap_gen_report_update
         zcx_abap_gen_class_read.
 
-
     METHODS replace_template_string
       IMPORTING
         !ir_string TYPE REF TO data
