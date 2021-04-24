@@ -41,7 +41,6 @@ CLASS zcl_abap_generator DEFINITION
         zcx_abap_gen_report_update
         zcx_abap_gen_class_read.
 
-
     METHODS replace_template_string
       IMPORTING
         !ir_string TYPE REF TO data
@@ -72,12 +71,15 @@ CLASS zcl_abap_generator DEFINITION
     METHODS get_report_sel_start
       RETURNING
         VALUE(rv_result) TYPE string.
+        
     METHODS get_report_sel_end
       RETURNING
         VALUE(rv_result) TYPE string.
+        
     METHODS get_report_set_start
       RETURNING
         VALUE(rv_result) TYPE string.
+        
     METHODS get_report_set_end
       RETURNING
         VALUE(rv_result) TYPE string.
@@ -101,6 +103,7 @@ CLASS zcl_abap_generator DEFINITION
     METHODS get_default_prefix
       RETURNING
         VALUE(rs_prefix) TYPE zzs_abap_gen_prefix.
+        
     METHODS show_results.
 
   PROTECTED SECTION.
@@ -225,10 +228,11 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     DATA lr_line TYPE REF TO data.
 
     ASSIGN ir_table->* TO <table>.
-    LOOP AT <table> REFERENCE INTO lr_line.
-      replace_template_structure( ir_structure = lr_line ).
-    ENDLOOP.
-
+    IF <table> IS ASSIGNED.
+      LOOP AT <table> REFERENCE INTO lr_line.
+        replace_template_structure( ir_structure = lr_line ).
+      ENDLOOP.
+    ENDIF.
   ENDMETHOD.
 
 
