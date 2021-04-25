@@ -26,11 +26,7 @@
       "exclude": [],
       "severity": "Error"
     },
-    "abapdoc":{
-      "exclude": [],
-      "severity": "Info",
-      "checkLocal": false
-    },
+    "abapdoc":false,
     "allowed_object_naming": {
       "exclude": [],
       "severity": "Error"
@@ -188,14 +184,7 @@
       "exclude": [],
       "severity": "Error"
     },
-    "double_space": {
-      "exclude": [],
-      "severity": "Info",
-      "keywords": true,
-      "startParen": true,
-      "endParen": true,
-      "afterColon": true
-    },
+    "double_space": false,
     "downport": {
       "exclude": [],
       "severity": "Error"
@@ -375,20 +364,8 @@
       "exclude": [],
       "severity": "Error"
     },
-    "in_statement_indentation": {
-      "exclude": [],
-      "severity": "Info",
-      "ignoreExceptions": true
-    },
-    "indentation": {
-      "exclude": [],
-      "severity": "Info",
-      "ignoreExceptions": true,
-      "alignTryCatch": false,
-      "globalClassSkipFirst": false,
-      "ignoreGlobalClassDefinition": false,
-      "ignoreGlobalInterface": false
-    },
+    "in_statement_indentation": false,
+    "indentation": false,
     "inline_data_old_versions": {
       "exclude": [],
       "severity": "Error"
@@ -428,11 +405,7 @@
       "severity": "Error",
       "length": 120
     },
-    "line_only_punc": {
-      "exclude": [],
-      "severity": "Info",
-      "ignoreExceptions": true
-    },
+    "line_only_punc": false, 
     "local_class_naming": {
       "exclude": [],
       "severity": "Error",
