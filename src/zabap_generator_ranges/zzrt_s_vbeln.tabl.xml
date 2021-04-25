@@ -4,7 +4,9 @@
   <asx:values>
    <DD02V>
     <TABNAME>ZZRT_S_VBELN</TABNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
+    <DDTEXT>Range Structure VBELN</DDTEXT>
    </DD02V>
    <DD03P_TABLE>
     <DD03P>
@@ -44,15 +46,6 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
    </DD03P_TABLE>
-   <I18N_LANGS>
-    <LANGU>E</LANGU>
-   </I18N_LANGS>
-   <DD02_TEXTS>
-    <item>
-     <DDLANGUAGE>E</DDLANGUAGE>
-     <DDTEXT>Range Structure VBELN</DDTEXT>
-    </item>
-   </DD02_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>

@@ -14,12 +14,11 @@
     <S_WIN32>X</S_WIN32>
     <S_PLATIN>X</S_PLATIN>
    </TSTCC>
-   <I18N_TPOOL>
-    <TSTCT>
-     <SPRSL>E</SPRSL>
-     <TTEXT>ABAP Generator</TTEXT>
-    </TSTCT>
-   </I18N_TPOOL>
+   <TSTCT>
+    <SPRSL>E</SPRSL>
+    <TCODE>ZABAP_GENERATOR</TCODE>
+    <TTEXT>ABAP Generator</TTEXT>
+   </TSTCT>
   </asx:values>
  </asx:abap>
 </abapGit>

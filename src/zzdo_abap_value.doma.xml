@@ -4,20 +4,13 @@
   <asx:values>
    <DD01V>
     <DOMNAME>ZZDO_ABAP_VALUE</DOMNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
     <DATATYPE>CHAR</DATATYPE>
     <LENG>000100</LENG>
     <OUTPUTLEN>000100</OUTPUTLEN>
     <LOWERCASE>X</LOWERCASE>
+    <DDTEXT>ABAP Value</DDTEXT>
    </DD01V>
-   <I18N_LANGS>
-    <LANGU>E</LANGU>
-   </I18N_LANGS>
-   <DD01_TEXTS>
-    <item>
-     <DDLANGUAGE>E</DDLANGUAGE>
-     <DDTEXT>ABAP Value</DDTEXT>
-    </item>
-   </DD01_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>
