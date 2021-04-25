@@ -14,7 +14,7 @@
     <item>
      <ID>I</ID>
      <KEY>001</KEY>
-     <ENTRY>Initialisierung</ENTRY>
+     <ENTRY>Initialization</ENTRY>
      <LENGTH>24</LENGTH>
     </item>
     <item>
@@ -26,43 +26,7 @@
     <item>
      <ID>R</ID>
      <ENTRY>ABAP Generator</ENTRY>
-     <LENGTH>70</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_INIT</KEY>
-     <ENTRY>Objekte Initialisieren</ENTRY>
-     <LENGTH>38</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_LOCAL</KEY>
-     <ENTRY>Lokale Objekte</ENTRY>
-     <LENGTH>38</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_PDESC</KEY>
-     <ENTRY>Paketbeschreibung</ENTRY>
-     <LENGTH>38</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_RTDICT</KEY>
-     <ENTRY>Erstelle Dict. Rangetable</ENTRY>
-     <LENGTH>38</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_TEMP</KEY>
-     <ENTRY>Templatename</ENTRY>
-     <LENGTH>38</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_UPD</KEY>
-     <ENTRY>Update aus Selection</ENTRY>
-     <LENGTH>38</LENGTH>
+     <LENGTH>14</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -94,6 +58,18 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>P_INIT</KEY>
+     <ENTRY>Initialize Objects</ENTRY>
+     <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_LOCAL</KEY>
+     <ENTRY>Local Objects</ENTRY>
+     <LENGTH>21</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>P_MSUF</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>20</LENGTH>
@@ -122,6 +98,12 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>P_PDESC</KEY>
+     <ENTRY>Package Description</ENTRY>
+     <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>P_RPPREF</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>31</LENGTH>
@@ -136,20 +118,38 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>P_RTDICT</KEY>
+     <ENTRY>Create Dict. Rangetable</ENTRY>
+     <LENGTH>31</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_TEMP</KEY>
+     <ENTRY>Templatename</ENTRY>
+     <LENGTH>20</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>P_TYPREF</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>30</LENGTH>
      <SPLIT>D</SPLIT>
     </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_UPD</KEY>
+     <ENTRY>Update from Selection Screen</ENTRY>
+     <LENGTH>36</LENGTH>
+    </item>
    </TPOOL>
    <I18N_TPOOL>
     <item>
-     <LANGUAGE>E</LANGUAGE>
+     <LANGUAGE>D</LANGUAGE>
      <TEXTPOOL>
       <item>
        <ID>I</ID>
        <KEY>001</KEY>
-       <ENTRY>Initialization</ENTRY>
+       <ENTRY>Initialisierung</ENTRY>
        <LENGTH>24</LENGTH>
       </item>
       <item>
@@ -161,7 +161,43 @@
       <item>
        <ID>R</ID>
        <ENTRY>ABAP Generator</ENTRY>
-       <LENGTH>14</LENGTH>
+       <LENGTH>70</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_INIT</KEY>
+       <ENTRY>Objekte Initialisieren</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_LOCAL</KEY>
+       <ENTRY>Lokale Objekte</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_PDESC</KEY>
+       <ENTRY>Paketbeschreibung</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_RTDICT</KEY>
+       <ENTRY>Erstelle Dict. Rangetable</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_TEMP</KEY>
+       <ENTRY>Templatename</ENTRY>
+       <LENGTH>38</LENGTH>
+      </item>
+      <item>
+       <ID>S</ID>
+       <KEY>P_UPD</KEY>
+       <ENTRY>Update aus Selection</ENTRY>
+       <LENGTH>38</LENGTH>
       </item>
       <item>
        <ID>S</ID>
@@ -193,18 +229,6 @@
       </item>
       <item>
        <ID>S</ID>
-       <KEY>P_INIT</KEY>
-       <ENTRY>Initialize Objects</ENTRY>
-       <LENGTH>26</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
-       <KEY>P_LOCAL</KEY>
-       <ENTRY>Local Objects</ENTRY>
-       <LENGTH>21</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
        <KEY>P_MSUF</KEY>
        <ENTRY>.</ENTRY>
        <LENGTH>20</LENGTH>
@@ -233,12 +257,6 @@
       </item>
       <item>
        <ID>S</ID>
-       <KEY>P_PDESC</KEY>
-       <ENTRY>Package Description</ENTRY>
-       <LENGTH>27</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
        <KEY>P_RPPREF</KEY>
        <ENTRY>.</ENTRY>
        <LENGTH>31</LENGTH>
@@ -253,28 +271,10 @@
       </item>
       <item>
        <ID>S</ID>
-       <KEY>P_RTDICT</KEY>
-       <ENTRY>Create Dict. Rangetable</ENTRY>
-       <LENGTH>31</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
-       <KEY>P_TEMP</KEY>
-       <ENTRY>Templatename</ENTRY>
-       <LENGTH>20</LENGTH>
-      </item>
-      <item>
-       <ID>S</ID>
        <KEY>P_TYPREF</KEY>
        <ENTRY>.</ENTRY>
        <LENGTH>30</LENGTH>
        <SPLIT>D</SPLIT>
-      </item>
-      <item>
-       <ID>S</ID>
-       <KEY>P_UPD</KEY>
-       <ENTRY>Update from Selection Screen</ENTRY>
-       <LENGTH>36</LENGTH>
       </item>
      </TEXTPOOL>
     </item>

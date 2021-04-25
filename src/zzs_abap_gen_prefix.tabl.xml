@@ -4,7 +4,9 @@
   <asx:values>
    <DD02V>
     <TABNAME>ZZS_ABAP_GEN_PREFIX</TABNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
     <TABCLASS>INTTAB</TABCLASS>
+    <DDTEXT>ABAP Generator Prefix Mapping</DDTEXT>
     <MASTERLANG>E</MASTERLANG>
     <EXCLASS>1</EXCLASS>
    </DD02V>
@@ -74,15 +76,6 @@
      <COMPTYPE>E</COMPTYPE>
     </DD03P>
    </DD03P_TABLE>
-   <I18N_LANGS>
-    <LANGU>E</LANGU>
-   </I18N_LANGS>
-   <DD02_TEXTS>
-    <item>
-     <DDLANGUAGE>E</DDLANGUAGE>
-     <DDTEXT>ABAP Generator Prefix Mapping</DDTEXT>
-    </item>
-   </DD02_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>

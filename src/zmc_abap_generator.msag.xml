@@ -7,73 +7,74 @@
     <MASTERLANG>E</MASTERLANG>
     <STEXT>ABAP Generator Messageclass</STEXT>
    </T100A>
-   <I18N_LANGS>
-    <LANGU>E</LANGU>
-   </I18N_LANGS>
-   <T100T>
-    <T100T>
+   <T100>
+    <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
-     <STEXT>ABAP Generator Messageclass</STEXT>
-    </T100T>
-   </T100T>
-   <T100_TEXTS>
-    <item>
-     <SPRSL>E</SPRSL>
      <MSGNR>000</MSGNR>
      <TEXT>&amp;1 &amp;2 &amp;3 &amp;4</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>001</MSGNR>
      <TEXT>Main Parameters not filled.</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>002</MSGNR>
      <TEXT>Class Creation Error. Class: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>003</MSGNR>
      <TEXT>Class Reading Error. Class: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>004</MSGNR>
      <TEXT>Class Updating Error. Class: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>005</MSGNR>
      <TEXT>Package Creation Error. Pack: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>006</MSGNR>
      <TEXT>Report Creation Error. Report: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>007</MSGNR>
      <TEXT>Report Reading Error. Report: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>008</MSGNR>
      <TEXT>Report Updating Error. Report: &amp;1</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>009</MSGNR>
      <TEXT>Objects successfully initialized.</TEXT>
-    </item>
-    <item>
+    </T100>
+    <T100>
      <SPRSL>E</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
      <MSGNR>010</MSGNR>
      <TEXT>Objects successfully updated.</TEXT>
-    </item>
-   </T100_TEXTS>
+    </T100>
+   </T100>
   </asx:values>
  </asx:abap>
 </abapGit>
