@@ -5,7 +5,7 @@ CLASS zcl_abap_generator_report DEFINITION
 
   PUBLIC SECTION.
 
-    METHODS Constructor
+    METHODS constructor
       IMPORTING
         io_main_generator TYPE REF TO zcl_abap_generator
         iv_name           TYPE zzde_abap_name
@@ -157,11 +157,30 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
           READ TABLE lt_range_types REFERENCE INTO DATA(lr_range_types)
           WITH KEY varname = lt_codeline[ 4 ].
           IF sy-subrc <> 0.
-            CONTINUE.
-          ENDIF.
-          ls_selection-typename = lr_range_types->typename.
-          ls_selection-dictype = lr_range_types->dictype.
+            SPLIT lt_codeline[ 4 ] AT '-' INTO DATA(lv_structure) DATA(lv_fieldname).
+            lv_fieldname = |{ lv_fieldname CASE = UPPER }|.
 
+            READ TABLE lt_range_types REFERENCE INTO lr_range_types
+            WITH KEY varname = lv_structure.
+            IF sy-subrc <> 0.
+              CONTINUE.
+            ENDIF.
+
+            SELECT SINGLE FROM dd03l
+            FIELDS rollname
+            WHERE as4local = 'A'
+            AND tabname = @lr_range_types->dictype
+            AND fieldname = @lv_fieldname
+            INTO @ls_selection-dictype.
+            IF sy-subrc <> 0.
+              CONTINUE.
+            ENDIF.
+            ls_selection-typename = |{ is_prefix-rt_type }{ lv_fieldname }|.
+
+          ELSE.
+            ls_selection-typename = lr_range_types->typename.
+            ls_selection-dictype = lr_range_types->dictype.
+          ENDIF.
         WHEN OTHERS.
           CONTINUE.
       ENDCASE.
@@ -206,12 +225,10 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-      DATA(lv_typename) = replace( val = lt_codeline[ 2 ] sub = '-' with = '_' ).
-
       rt_range_types = VALUE #( BASE rt_range_types (
                                     varname = lt_codeline[ 1 ]
                                     dictype = |{ lt_codeline[ 2 ] CASE = UPPER }|
-                                    typename = |{ is_prefix-rt_type }{ lv_typename CASE = UPPER }|
+                                    typename = |{ is_prefix-rt_type }{ lt_codeline[ 2 ] CASE = UPPER }|
                                     ) ).
 
     ENDLOOP.
@@ -335,7 +352,22 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
       OTHERS                     = 5
   ).
     IF sy-subrc <> 0.
-      RETURN.
+      cl_package=>load_package(
+      EXPORTING
+        i_package_name             = |${ lv_packagename }|
+*        i_force_reload             =
+      IMPORTING
+        e_package                  = lo_package
+      EXCEPTIONS
+        object_not_existing        = 1
+        unexpected_error           = 2
+        intern_err                 = 3
+        object_locked_and_modified = 4
+        OTHERS                     = 5
+).
+      IF sy-subrc <> 0.
+        RETURN.
+      ENDIF.
     ENDIF.
 
     lo_package->get_elements(

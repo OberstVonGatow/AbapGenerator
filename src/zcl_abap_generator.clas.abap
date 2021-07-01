@@ -38,8 +38,7 @@ CLASS zcl_abap_generator DEFINITION
       RAISING
         zcx_abap_gen_report_read
         zcx_abap_gen_class_update
-        zcx_abap_gen_report_update
-        zcx_abap_gen_class_read.
+        zcx_abap_gen_report_update.
 
 
     METHODS replace_template_string
@@ -198,9 +197,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     DATA lo_structdescr TYPE REF TO cl_abap_structdescr.
 
     ASSIGN ir_structure->* TO <structure>.
-    IF <structure> IS NOT ASSIGNED.
-      RETURN.
-    ENDIF.
     lo_structdescr ?= cl_abap_structdescr=>describe_by_data_ref( p_data_ref = ir_structure ).
 
     LOOP AT lo_structdescr->components ASSIGNING FIELD-SYMBOL(<component>).
@@ -228,11 +224,10 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     DATA lr_line TYPE REF TO data.
 
     ASSIGN ir_table->* TO <table>.
-    IF <table> IS ASSIGNED.
-      LOOP AT <table> REFERENCE INTO lr_line.
-        replace_template_structure( ir_structure = lr_line ).
-      ENDLOOP.
-    ENDIF.
+    LOOP AT <table> REFERENCE INTO lr_line.
+      replace_template_structure( ir_structure = lr_line ).
+    ENDLOOP.
+
   ENDMETHOD.
 
 
@@ -299,7 +294,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     IF sy-subrc <> 0.
       set_initial_settings( ).
     ENDIF.
-
   ENDMETHOD.
 
   METHOD set_initial_settings.
@@ -330,10 +324,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
          ).
 
     INSERT zzt_abap_gen FROM TABLE mt_settings.
-    IF sy-subrc = 0.
-      COMMIT WORK AND WAIT.
-    ENDIF.
-
   ENDMETHOD.
 
   METHOD get_package_rangetypes.

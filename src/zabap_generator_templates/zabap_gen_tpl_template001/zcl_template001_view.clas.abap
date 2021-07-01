@@ -45,15 +45,10 @@ CLASS zcl_template001_view IMPLEMENTATION.
 * Create Fieldcat
     DATA: o_salv TYPE REF TO cl_salv_table.
 
-    TRY.
-        cl_salv_table=>factory( IMPORTING
-                                  r_salv_table = o_salv
-                                CHANGING
-                                  t_table      = <table> ).
-      CATCH cx_salv_msg.
-        "handle exception
-        RETURN.
-    ENDTRY.
+    cl_salv_table=>factory( IMPORTING
+                              r_salv_table = o_salv
+                            CHANGING
+                              t_table      = <table> ).
 
     DATA(lt_fcat) = cl_salv_controller_metadata=>get_lvc_fieldcatalog( r_columns      = o_salv->get_columns( )
                                                                        r_aggregations = o_salv->get_aggregations( ) ).

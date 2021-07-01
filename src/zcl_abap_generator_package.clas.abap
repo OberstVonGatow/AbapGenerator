@@ -53,7 +53,7 @@ CLASS zcl_abap_generator_package IMPLEMENTATION.
 
   METHOD build_new_packagename.
 
-    rv_packagename  =  iv_namespace && iv_name .
+    rv_packagename  =  iv_namespace && '_' && iv_name .
     IF iv_local = abap_true.
       rv_packagename = |${ rv_packagename }|.
     ENDIF.

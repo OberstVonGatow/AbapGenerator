@@ -5,7 +5,7 @@ CLASS zcl_abap_generator_class DEFINITION
 
   PUBLIC SECTION.
 
-    METHODS Constructor
+    METHODS constructor
       IMPORTING
         io_main_generator TYPE REF TO zcl_abap_generator.
 
@@ -115,13 +115,11 @@ CLASS zcl_abap_generator_class DEFINITION
         iv_classname TYPE seoclsname
       RAISING
         zcx_abap_gen_class_read.
-
     METHODS delete_attributes
       IMPORTING
         is_prefix TYPE zzs_abap_gen_prefix
       RAISING
         zcx_abap_gen_class_update.
-
     METHODS delete_parameters
       IMPORTING
         iv_method TYPE vseomethod-cmpname
@@ -147,7 +145,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
     DATA lt_clskeys TYPE seo_clskeys.
     lt_clskeys = read_classes( lv_templatepackage ).
 
-    LOOP AT lt_clskeys REFERENCE INTO DATA(Lr_clskey).
+    LOOP AT lt_clskeys REFERENCE INTO DATA(lr_clskey).
 
       DATA(ls_new_clskey) = lr_clskey->*.
       IF find( val = ls_new_clskey-clsname sub = iv_template ) = -1 .
@@ -394,7 +392,22 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
       OTHERS                     = 5
   ).
     IF sy-subrc <> 0.
-      RETURN.
+      cl_package=>load_package(
+      EXPORTING
+        i_package_name             = |${ iv_package }|
+*        i_force_reload             =
+      IMPORTING
+        e_package                  = lo_package
+      EXCEPTIONS
+        object_not_existing        = 1
+        unexpected_error           = 2
+        intern_err                 = 3
+        object_locked_and_modified = 4
+        OTHERS                     = 5
+).
+      IF sy-subrc <> 0.
+        RETURN.
+      ENDIF.
     ENDIF.
 
     lo_package->get_elements(
@@ -538,7 +551,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
       WITH KEY clsname = ls_type-clsname
                cmpname = ls_type-cmpname.
       IF sy-subrc = 0.
-        DELETE mt_upd_types FROM lr_upd_types->*.
+        DELETE TABLE mt_upd_types FROM lr_upd_types->*.
         CONTINUE.
       ENDIF.
 
@@ -709,7 +722,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
       WITH KEY clsname = ls_attkey-clsname
                cmpname = ls_attkey-cmpname.
       IF sy-subrc = 0.
-        DELETE mt_upd_attributes FROM lr_upd_att->*.
+        DELETE TABLE mt_upd_attributes FROM lr_upd_att->*.
         CONTINUE.
       ENDIF.
 
@@ -786,7 +799,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
                cmpname = ls_parkey-cmpname
                sconame = ls_parkey-sconame.
       IF sy-subrc = 0.
-        DELETE mt_upd_parameters FROM lr_upd_para->*.
+        DELETE TABLE mt_upd_parameters FROM lr_upd_para->*.
         CONTINUE.
       ENDIF.
 
@@ -1067,21 +1080,37 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
 
   METHOD read_existing_rangetypes.
 
+
     cl_package=>load_package(
+    EXPORTING
+      i_package_name             = iv_packagename
+      i_force_reload             = abap_true
+    IMPORTING
+      e_package                  = DATA(lo_package)
+    EXCEPTIONS
+      object_not_existing        = 1
+      unexpected_error           = 2
+      intern_err                 = 3
+      object_locked_and_modified = 4
+      OTHERS                     = 5
+  ).
+    IF sy-subrc <> 0.
+      cl_package=>load_package(
       EXPORTING
-        i_package_name             = iv_packagename
-        i_force_reload             = abap_true
+        i_package_name             = |${ iv_packagename }|
+*        i_force_reload             =
       IMPORTING
-        e_package                  = DATA(lo_package)
+        e_package                  = lo_package
       EXCEPTIONS
         object_not_existing        = 1
         unexpected_error           = 2
         intern_err                 = 3
         object_locked_and_modified = 4
         OTHERS                     = 5
-    ).
-    IF sy-subrc <> 0.
-      RETURN.
+).
+      IF sy-subrc <> 0.
+        RETURN.
+      ENDIF.
     ENDIF.
 
     lo_package->get_elements(
