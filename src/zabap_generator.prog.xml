@@ -6,6 +6,7 @@
     <NAME>ZABAP_GENERATOR</NAME>
     <DBAPL>S</DBAPL>
     <SUBC>1</SUBC>
+    <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
     <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
@@ -60,13 +61,13 @@
      <ID>S</ID>
      <KEY>P_INIT</KEY>
      <ENTRY>Initialize Objects</ENTRY>
-     <LENGTH>26</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>P_LOCAL</KEY>
      <ENTRY>Local Objects</ENTRY>
-     <LENGTH>21</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -100,7 +101,7 @@
      <ID>S</ID>
      <KEY>P_PDESC</KEY>
      <ENTRY>Package Description</ENTRY>
-     <LENGTH>27</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -120,13 +121,13 @@
      <ID>S</ID>
      <KEY>P_RTDICT</KEY>
      <ENTRY>Create Dict. Rangetable</ENTRY>
-     <LENGTH>31</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
      <KEY>P_TEMP</KEY>
      <ENTRY>Templatename</ENTRY>
-     <LENGTH>20</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -139,7 +140,7 @@
      <ID>S</ID>
      <KEY>P_UPD</KEY>
      <ENTRY>Update from Selection Screen</ENTRY>
-     <LENGTH>36</LENGTH>
+     <LENGTH>38</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
