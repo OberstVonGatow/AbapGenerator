@@ -8,7 +8,7 @@ CLASS zcl_abap_generator DEFINITION
     CONSTANTS c_codetype_selops TYPE string VALUE 'SELECT-OPTIONS'.
     CONSTANTS c_codetype_parameters TYPE string VALUE 'PARAMETERS'.
 
-    METHODS Constructor.
+    METHODS constructor.
 
     METHODS set_main_attributes
       IMPORTING
@@ -233,6 +233,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
         replace_template_structure( ir_structure = lr_line ).
       ENDLOOP.
     ENDIF.
+
   ENDMETHOD.
 
 

@@ -19,6 +19,15 @@
     <TCODE>ZABAP_GENERATOR</TCODE>
     <TTEXT>ABAP Generator</TTEXT>
    </TSTCT>
+   <I18N_TPOOL>
+    <TSTCT>
+     <SPRSL>D</SPRSL>
+    </TSTCT>
+    <TSTCT>
+     <SPRSL>H</SPRSL>
+     <TTEXT>ABAP Generator</TTEXT>
+    </TSTCT>
+   </I18N_TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>
