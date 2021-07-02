@@ -10,6 +10,11 @@
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Class Select-Options Prefix</DDTEXT>
+    <REPTEXT>Class Select-Options Prefix</REPTEXT>
+    <SCRTEXT_S>SelOp.Pref</SCRTEXT_S>
+    <SCRTEXT_M>Class SelOpt Prefix</SCRTEXT_M>
+    <SCRTEXT_L>Class Select-Options Prefix</SCRTEXT_L>
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>
