@@ -75,6 +75,22 @@
      <TEXT>Objects successfully updated.</TEXT>
     </T100>
    </T100>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>H</LANGU>
+   </I18N_LANGS>
+   <T100T>
+    <T100T>
+     <SPRSL>D</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
+     <STEXT>ABAP Generator Messageclass</STEXT>
+    </T100T>
+    <T100T>
+     <SPRSL>H</SPRSL>
+     <ARBGB>ZMC_ABAP_GENERATOR</ARBGB>
+     <STEXT>ABAP Generator Messageclass</STEXT>
+    </T100T>
+   </T100T>
   </asx:values>
  </asx:abap>
 </abapGit>

@@ -18,6 +18,23 @@
     <DTELMASTER>E</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>
+   <I18N_LANGS>
+    <LANGU>D</LANGU>
+    <LANGU>H</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Programm Parameterprefix</DDTEXT>
+     <REPTEXT>Programm Parameterprefix</REPTEXT>
+     <SCRTEXT_S>Prog. Para</SCRTEXT_S>
+     <SCRTEXT_M>Prog. Parameter</SCRTEXT_M>
+     <SCRTEXT_L>Programm Parameterprefix</SCRTEXT_L>
+    </item>
+    <item>
+     <DDLANGUAGE>H</DDLANGUAGE>
+    </item>
+   </DD04_TEXTS>
   </asx:values>
  </asx:abap>
 </abapGit>
