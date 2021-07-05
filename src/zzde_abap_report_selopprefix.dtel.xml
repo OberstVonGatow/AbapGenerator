@@ -10,6 +10,7 @@
     <SCRLEN1>10</SCRLEN1>
     <SCRLEN2>20</SCRLEN2>
     <SCRLEN3>40</SCRLEN3>
+    <DDTEXT>Report Selection Prefix</DDTEXT>
     <REPTEXT>Programm SelectOptions Prefix</REPTEXT>
     <SCRTEXT_S>Prog. SeOp</SCRTEXT_S>
     <SCRTEXT_M>Prog. SelOpt Prefix</SCRTEXT_M>
@@ -18,9 +19,17 @@
     <REFKIND>D</REFKIND>
    </DD04V>
    <I18N_LANGS>
+    <LANGU>D</LANGU>
     <LANGU>H</LANGU>
    </I18N_LANGS>
    <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <REPTEXT>Programm SelectOptions Prefix</REPTEXT>
+     <SCRTEXT_S>Prog. SeOp</SCRTEXT_S>
+     <SCRTEXT_M>Prog. SelOpt Prefix</SCRTEXT_M>
+     <SCRTEXT_L>Programm SelectOptions Prefix</SCRTEXT_L>
+    </item>
     <item>
      <DDLANGUAGE>H</DDLANGUAGE>
      <REPTEXT>Programm SelectOptions Prefix</REPTEXT>

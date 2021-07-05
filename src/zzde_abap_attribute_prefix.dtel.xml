@@ -19,9 +19,18 @@
     <REFKIND>D</REFKIND>
    </DD04V>
    <I18N_LANGS>
+    <LANGU>D</LANGU>
     <LANGU>H</LANGU>
    </I18N_LANGS>
    <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>Report Parameter Prefix</DDTEXT>
+     <REPTEXT>Attribut Prefix</REPTEXT>
+     <SCRTEXT_S>Attr.Pref.</SCRTEXT_S>
+     <SCRTEXT_M>Attribut Prefix</SCRTEXT_M>
+     <SCRTEXT_L>Attribut Prefix</SCRTEXT_L>
+    </item>
     <item>
      <DDLANGUAGE>H</DDLANGUAGE>
     </item>

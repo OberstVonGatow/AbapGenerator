@@ -19,9 +19,18 @@
     <REFKIND>D</REFKIND>
    </DD04V>
    <I18N_LANGS>
+    <LANGU>D</LANGU>
     <LANGU>H</LANGU>
    </I18N_LANGS>
    <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>D</DDLANGUAGE>
+     <DDTEXT>ABAP GEN Value</DDTEXT>
+     <REPTEXT>Value</REPTEXT>
+     <SCRTEXT_S>Value</SCRTEXT_S>
+     <SCRTEXT_M>Value</SCRTEXT_M>
+     <SCRTEXT_L>Value</SCRTEXT_L>
+    </item>
     <item>
      <DDLANGUAGE>H</DDLANGUAGE>
      <DDTEXT>ABAP GEN Value</DDTEXT>
