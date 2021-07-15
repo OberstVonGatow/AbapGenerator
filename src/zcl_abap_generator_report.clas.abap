@@ -179,7 +179,22 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
 
           ELSE.
             ls_selection-typename = lr_range_types->typename.
-            ls_selection-dictype = lr_range_types->dictype.
+            IF find( val = lr_range_types->dictype sub = '-' ) > 0.
+              SPLIT lr_range_types->dictype AT '-' INTO lv_structure lv_fieldname.
+              lv_structure = |{ lv_structure CASE = UPPER }|.
+              lv_fieldname = |{ lv_fieldname CASE = UPPER }|.
+              SELECT SINGLE FROM dd03l
+              FIELDS rollname
+              WHERE as4local = 'A'
+              AND tabname = @lv_structure
+              AND fieldname = @lv_fieldname
+              INTO @ls_selection-dictype.
+              IF sy-subrc <> 0.
+                CONTINUE.
+              ENDIF.
+            ELSE.
+              ls_selection-dictype = lr_range_types->dictype.
+            ENDIF.
           ENDIF.
         WHEN OTHERS.
           CONTINUE.
@@ -225,10 +240,13 @@ CLASS zcl_abap_generator_report IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
+      DATA(lv_typename) = replace( val = lt_codeline[ 2 ] sub = '-' with = '_' ).
+
+
       rt_range_types = VALUE #( BASE rt_range_types (
                                     varname = lt_codeline[ 1 ]
                                     dictype = |{ lt_codeline[ 2 ] CASE = UPPER }|
-                                    typename = |{ is_prefix-rt_type }{ lt_codeline[ 2 ] CASE = UPPER }|
+                                    typename = |{ is_prefix-rt_type }{ lv_typename CASE = UPPER }|
                                     ) ).
 
     ENDLOOP.
