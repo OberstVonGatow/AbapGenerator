@@ -41,7 +41,6 @@ CLASS zcl_abap_generator DEFINITION
         zcx_abap_gen_report_update
         zcx_abap_gen_class_read.
 
-
     METHODS replace_template_string
       IMPORTING
         !ir_string TYPE REF TO data
@@ -221,7 +220,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD replace_template_table.
 
     FIELD-SYMBOLS <table> TYPE STANDARD TABLE.
@@ -235,7 +233,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 
   METHOD run_initialization.
 
@@ -263,9 +260,6 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ).
 
   ENDMETHOD.
-
-
-
 
   METHOD update_selection.
 
@@ -400,9 +394,5 @@ CLASS zcl_abap_generator IMPLEMENTATION.
   METHOD show_results.
     mo_report_generator->show_report( ).
   ENDMETHOD.
-
-
-
-
 
 ENDCLASS.
