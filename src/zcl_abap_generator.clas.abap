@@ -122,9 +122,7 @@ CLASS zcl_abap_generator DEFINITION
     DATA mt_technical_data TYPE STANDARD TABLE OF abap_compname.
 
     METHODS get_settings.
-    METHODS set_initial_settings
-      RETURNING
-        VALUE(rv_result) TYPE string.
+    METHODS set_initial_settings.
 
     METHODS clear_technical_data
       IMPORTING
@@ -176,9 +174,19 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ASSIGN ir_string->* TO <any>.
     IF <any> IS ASSIGNED.
       IF iv_lower = abap_true.
-        <any> = replace( val = <any> sub = mv_template with = to_lower( mv_name ) occ = 0 case = abap_false ).
+        <any> = replace(
+            val = <any>
+            sub = mv_template
+            with = to_lower( mv_name )
+            occ = 0
+            case = abap_false ).
       ELSE.
-        <any> = replace( val = <any> sub = mv_template with = mv_name occ = 0 case = abap_false ).
+        <any> = replace(
+            val = <any>
+            sub = mv_template
+            with = mv_name
+            occ = 0
+            case = abap_false ).
       ENDIF.
 
     ENDIF.

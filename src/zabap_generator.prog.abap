@@ -120,7 +120,6 @@ START-OF-SELECTION.
   IF p_init = abap_true.
     TRY.
         lo_generator->run_initialization(
-          EXPORTING
             iv_packagedesc = p_pdesc
             iv_dlvunit     = p_dlvuni
             iv_parentcl    = p_parent
@@ -146,7 +145,6 @@ START-OF-SELECTION.
 
     TRY.
         lo_generator->update_selection(
-          EXPORTING
             iv_modelsufix       = p_msuf
             is_prefix           = ls_prefix
             iv_dict_rangetab    = p_rtdict
