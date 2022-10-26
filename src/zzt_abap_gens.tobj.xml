@@ -14,7 +14,6 @@
     <LANGUAGE>E</LANGUAGE>
     <OBJECTNAME>ZZT_ABAP_GEN</OBJECTNAME>
     <OBJECTTYPE>S</OBJECTTYPE>
-    <DDTEXT>ABAP Generator Settings</DDTEXT>
    </OBJT>
    <OBJS>
     <OBJS>
@@ -36,6 +35,7 @@
      <TYPE>1</TYPE>
      <LISTE>0001</LISTE>
      <BASTAB>X</BASTAB>
+     <FLAG>X</FLAG>
     </TVDIR>
    </TOBJ>
   </asx:values>

@@ -15,6 +15,7 @@ CLASS zcl_abap_generator DEFINITION
         iv_name      TYPE zzde_abap_name
         iv_namespace TYPE zzde_abap_namespace
         iv_local     TYPE zzde_abap_local
+        iv_pdevclass TYPE devlayer
       RAISING
         zcx_abap_gen_main_att.
 
@@ -40,6 +41,7 @@ CLASS zcl_abap_generator DEFINITION
         zcx_abap_gen_class_update
         zcx_abap_gen_report_update
         zcx_abap_gen_class_read.
+
 
     METHODS replace_template_string
       IMPORTING
@@ -97,6 +99,10 @@ CLASS zcl_abap_generator DEFINITION
       RETURNING
         VALUE(rv_result) TYPE abap_bool.
 
+    METHODS get_default_pdevclass
+      RETURNING
+        VALUE(rv_result) TYPE devlayer.
+
     METHODS get_default_prefix
       RETURNING
         VALUE(rs_prefix) TYPE zzs_abap_gen_prefix.
@@ -150,6 +156,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
             iv_name = iv_name
             iv_namespace = iv_namespace
             iv_local = iv_local
+            iv_pdevclass = iv_pdevclass
         ).
 
     mo_classes_generator = NEW #(
@@ -220,6 +227,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD replace_template_table.
 
     FIELD-SYMBOLS <table> TYPE STANDARD TABLE.
@@ -233,6 +241,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
+
 
   METHOD run_initialization.
 
@@ -260,6 +269,9 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ).
 
   ENDMETHOD.
+
+
+
 
   METHOD update_selection.
 
@@ -370,6 +382,9 @@ CLASS zcl_abap_generator IMPLEMENTATION.
   METHOD get_default_dict_rt_type.
     rv_result = mt_settings[ object = 'DEFAULT_DICT_RT_TYP' ]-value.
   ENDMETHOD.
+  METHOD get_default_pdevclass.
+    rv_result = mt_settings[ object = 'DEFAULT_PDEVCLASS' ]-value.
+  ENDMETHOD.
 
   METHOD get_default_prefix.
     rs_prefix-report_parameter = mt_settings[ object = 'REPORT_P_PREFIX' ]-value.
@@ -394,5 +409,9 @@ CLASS zcl_abap_generator IMPLEMENTATION.
   METHOD show_results.
     mo_report_generator->show_report( ).
   ENDMETHOD.
+
+
+
+
 
 ENDCLASS.

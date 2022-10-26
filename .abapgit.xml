@@ -5,6 +5,13 @@
    <MASTER_LANGUAGE>E</MASTER_LANGUAGE>
    <STARTING_FOLDER>/src/</STARTING_FOLDER>
    <FOLDER_LOGIC>FULL</FOLDER_LOGIC>
+   <IGNORE>
+    <item>/src/zabap_generator_ranges/zzrt_matkl.ttyp.xml</item>
+    <item>/src/zabap_generator_ranges/zzrt_matnr.ttyp.xml</item>
+    <item>/src/zabap_generator_ranges/zzrt_s_matkl.tabl.xml</item>
+    <item>/src/zabap_generator_ranges/zzrt_s_vbeln.tabl.xml</item>
+    <item>/src/zabap_generator_ranges/zzrt_vbeln.ttyp.xml</item>
+   </IGNORE>
   </DATA>
  </asx:values>
 </asx:abap>

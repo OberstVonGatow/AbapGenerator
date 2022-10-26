@@ -879,6 +879,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD create_dict_rangetypes.
+    DATA lv_rangestructure TYPE tabname.
 
     DATA(lv_package_rangetypes) = mo_generator->get_package_rangetypes(  ).
     DATA(lt_rangetables) = read_existing_rangetypes( lv_package_rangetypes ).
@@ -890,8 +891,7 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-
-      DATA(lv_rangestructure) = |{ is_prefix-rt_type }S_{ lr_sel->dictype }|.
+      lv_rangestructure = |{ is_prefix-rt_type }S_{ lr_sel->dictype }|.
 
       DATA  lt_fields_tab  TYPE STANDARD TABLE OF dd03p.
       lt_fields_tab = VALUE #(
@@ -900,8 +900,6 @@ CLASS zcl_abap_generator_class IMPLEMENTATION.
                   ( tabname = lv_rangestructure fieldname = 'LOW' position = 0003 rollname = lr_sel->dictype comptype = 'E'  )
                   ( tabname = lv_rangestructure fieldname = 'HIGH' position = 0004 rollname = lr_sel->dictype comptype = 'E'  )
                ).
-
-
 
       CALL FUNCTION 'RS_CORR_INSERT'
         EXPORTING

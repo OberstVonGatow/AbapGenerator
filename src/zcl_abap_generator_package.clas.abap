@@ -5,11 +5,12 @@ CLASS zcl_abap_generator_package DEFINITION
 
   PUBLIC SECTION.
 
-    METHODS Constructor
+    METHODS constructor
       IMPORTING
         iv_name      TYPE zzde_abap_name
         iv_namespace TYPE zzde_abap_namespace
-        iv_local     TYPE zzde_abap_local.
+        iv_local     TYPE zzde_abap_local
+        iv_pdevclass TYPE devlayer.
 
     METHODS create_package
       IMPORTING
@@ -25,6 +26,7 @@ CLASS zcl_abap_generator_package DEFINITION
   PRIVATE SECTION.
 
     DATA mv_new_packagename  TYPE packname.
+    DATA mv_pdevclass TYPE devlayer.
 
     METHODS build_new_packagename
       IMPORTING
@@ -43,6 +45,10 @@ CLASS zcl_abap_generator_package IMPLEMENTATION.
 
   METHOD constructor.
 
+    IF iv_local = abap_false.
+      mv_pdevclass = iv_pdevclass.
+    ENDIF.
+
     mv_new_packagename = build_new_packagename(
             iv_namespace = iv_namespace
             iv_name      = iv_name
@@ -53,7 +59,7 @@ CLASS zcl_abap_generator_package IMPLEMENTATION.
 
   METHOD build_new_packagename.
 
-    rv_packagename  =  iv_namespace && iv_name .
+    rv_packagename  =  iv_namespace && '_' && iv_name .
     IF iv_local = abap_true.
       rv_packagename = |${ rv_packagename }|.
     ENDIF.
@@ -67,8 +73,7 @@ CLASS zcl_abap_generator_package IMPLEMENTATION.
     ls_package_data-devclass = mv_new_packagename.
     ls_package_data-ctext = iv_packagedesc.
     ls_package_data-parentcl = iv_parentcl.
-*    ls_package_data-component
-*   ls_package_data-pdevclass = 'ZKED'.
+    ls_package_data-pdevclass = mv_pdevclass.
     ls_package_data-dlvunit = iv_dlvunit.
     ls_package_data-as4user = sy-uname.
 
