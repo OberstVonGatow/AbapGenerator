@@ -15,6 +15,7 @@ CLASS zcl_abap_generator DEFINITION
         iv_name      TYPE zzde_abap_name
         iv_namespace TYPE zzde_abap_namespace
         iv_local     TYPE zzde_abap_local
+        iv_pdevclass TYPE devlayer
       RAISING
         zcx_abap_gen_main_att.
 
@@ -98,6 +99,10 @@ CLASS zcl_abap_generator DEFINITION
       RETURNING
         VALUE(rv_result) TYPE abap_bool.
 
+    METHODS get_default_pdevclass
+      RETURNING
+        VALUE(rv_result) TYPE devlayer.
+
     METHODS get_default_prefix
       RETURNING
         VALUE(rs_prefix) TYPE zzs_abap_gen_prefix.
@@ -117,9 +122,7 @@ CLASS zcl_abap_generator DEFINITION
     DATA mt_technical_data TYPE STANDARD TABLE OF abap_compname.
 
     METHODS get_settings.
-    METHODS set_initial_settings
-      RETURNING
-        VALUE(rv_result) TYPE string.
+    METHODS set_initial_settings.
 
     METHODS clear_technical_data
       IMPORTING
@@ -151,6 +154,7 @@ CLASS zcl_abap_generator IMPLEMENTATION.
             iv_name = iv_name
             iv_namespace = iv_namespace
             iv_local = iv_local
+            iv_pdevclass = iv_pdevclass
         ).
 
     mo_classes_generator = NEW #(
@@ -170,9 +174,19 @@ CLASS zcl_abap_generator IMPLEMENTATION.
     ASSIGN ir_string->* TO <any>.
     IF <any> IS ASSIGNED.
       IF iv_lower = abap_true.
-        <any> = replace( val = <any> sub = mv_template with = to_lower( mv_name ) occ = 0 case = abap_false ).
+        <any> = replace(
+            val = <any>
+            sub = mv_template
+            with = to_lower( mv_name )
+            occ = 0
+            case = abap_false ).
       ELSE.
-        <any> = replace( val = <any> sub = mv_template with = mv_name occ = 0 case = abap_false ).
+        <any> = replace(
+            val = <any>
+            sub = mv_template
+            with = mv_name
+            occ = 0
+            case = abap_false ).
       ENDIF.
 
     ENDIF.
@@ -375,6 +389,9 @@ CLASS zcl_abap_generator IMPLEMENTATION.
   ENDMETHOD.
   METHOD get_default_dict_rt_type.
     rv_result = mt_settings[ object = 'DEFAULT_DICT_RT_TYP' ]-value.
+  ENDMETHOD.
+  METHOD get_default_pdevclass.
+    rv_result = mt_settings[ object = 'DEFAULT_PDEVCLASS' ]-value.
   ENDMETHOD.
 
   METHOD get_default_prefix.

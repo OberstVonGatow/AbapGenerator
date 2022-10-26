@@ -1,7 +1,5 @@
 *---------------------------------------------------------------------*
 *    view related data declarations
-*   generation date: 24.02.2021 at 23:07:22
-*   view maintenance generator version: #001407#
 *---------------------------------------------------------------------*
 *...processing: ZZT_ABAP_GEN....................................*
 DATA:  BEGIN OF STATUS_ZZT_ABAP_GEN                  .   "state vector

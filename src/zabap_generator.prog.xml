@@ -105,6 +105,13 @@
     </item>
     <item>
      <ID>S</ID>
+     <KEY>P_PDEVCL</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
      <KEY>P_RPPREF</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>31</LENGTH>
