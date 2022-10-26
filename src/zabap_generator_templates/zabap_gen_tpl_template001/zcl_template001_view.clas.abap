@@ -14,7 +14,7 @@ CLASS zcl_template001_view DEFINITION
   PRIVATE SECTION.
 
     DATA mo_model TYPE REF TO zcl_template001_model.
-    DATA mo_alv TYPE REF TO zcl_gui_alv_grid.
+    DATA mo_alv TYPE REF TO cl_gui_alv_grid.
     DATA ms_variant TYPE disvariant.
 
 ENDCLASS.
@@ -39,7 +39,7 @@ CLASS zcl_template001_view IMPLEMENTATION.
     DATA(lr_data) = mo_model->get_output_data( ).
     ASSIGN lr_data->* TO <lt_table>.
 
-    mo_alv = NEW zcl_gui_alv_grid(
+    mo_alv = NEW cl_gui_alv_grid(
                       i_parent = cl_gui_container=>default_screen
                       i_appl_events = abap_true ).
 
@@ -74,9 +74,8 @@ CLASS zcl_template001_view IMPLEMENTATION.
                                           it_fieldcatalog    = lt_fcat
                                           it_outtab          = <lt_table> ).
 
-    CALL FUNCTION 'Z_ALV_GRID_DISPLAY'
-      EXPORTING
-        io_alv_grid = mo_alv.
+* Force cl_gui_container=>default_screen
+    WRITE: space.
 
   ENDMETHOD.
 
